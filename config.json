@@ -1,0 +1,122 @@
+{
+	"threads": 2,
+	"coin": "etc",
+	"name": "main",
+	"network": "classic",
+
+	"avgBlockTime": 13,
+	"blockTimeWindow": 300,
+
+	"proxy": {
+		"enabled": true,
+		"listen": "0.0.0.0:8888",
+		"limitHeadersSize": 1024,
+		"limitBodySize": 256,
+		"behindReverseProxy": false,
+		"blockRefreshInterval": "120ms",
+		"stateUpdateInterval": "3s",
+		"difficulty": 2000000000,
+		"hashrateExpiration": "3h",
+
+		"healthCheck": true,
+		"maxFails": 100,
+
+		"stratum": {
+			"enabled": true,
+			"listen": "0.0.0.0:8008",
+			"timeout": "120s",
+			"maxConn": 8192
+		},
+
+		"policy": {
+			"workers": 8,
+			"resetInterval": "60m",
+			"refreshInterval": "1m",
+
+			"banning": {
+				"enabled": false,
+				"ipset": "blacklist",
+				"timeout": 1800,
+				"invalidPercent": 50,
+				"checkThreshold": 50,
+				"malformedLimit": 5
+			},
+			"limits": {
+				"enabled": false,
+				"limit": 30,
+				"grace": "5m",
+				"limitJump": 10
+			}
+		}
+	},
+
+	"api": {
+		"enabled": true,
+		"purgeOnly": false,
+		"purgeInterval": "10m",
+		"listen": "0.0.0.0:8080",
+		"statsCollectInterval": "5s",
+		"hashrateWindow": "30m",
+		"hashrateLargeWindow": "3h",
+		"luckWindow": [64, 128, 256],
+		"payments": 30,
+		"blocks": 50,
+		"poolCharts":"0 */10 * * * *",
+		"poolChartsNum":72,
+		"minerCharts":"0 */10 * * * *",
+		"minerChartsNum":72,
+		"netCharts":"0 */10 * * * *",
+		"netChartsNum":72,
+		"clientCharts":"0 */10 * * * *",
+		"clientChartsNum":72,
+		"workerCharts":"0 */10 * * * *",
+		"workerChartsNum":72
+	},
+
+	"upstreamCheckInterval": "5s",
+	"upstream": [
+		{
+			"name": "main",
+			"url": "http://127.0.0.1:8545",
+			"timeout": "10s"
+		}
+	],
+
+	"redis": {
+		"endpoint": "127.0.0.1:6379",
+		"poolSize": 20,
+		"database": 4,
+		"password": ""
+	},
+
+	"unlocker": {
+		"enabled": true,
+		"poolFee": 0.5,
+		"poolFeeAddress": "0x40718577f3faab8252571acbb9a46db69808711b",
+		"depth": 100,
+		"immatureDepth": 20,
+		"keepTxFees": false,
+		"interval": "100m",
+		"daemon": "http://127.0.0.1:8545",
+		"timeout": "10s"
+	},
+
+	"payouts": {
+		"enabled": true,
+		"requirePeers": 25,
+		"interval": "10m",
+		"daemon": "http://127.0.0.1:8545",
+		"timeout": "10s",
+		"address": "0x278d7a11f13Ab8D7a41Bcce7cD28AB5c38EC99AA",
+		"gas": "21000",
+		"gasPrice": "50000000000",
+		"autoGas": true,
+		"threshold": 10000000,
+		"bgsave": false
+	},
+
+	"newrelicEnabled": false,
+	"newrelicName": "MyEtherProxy",
+	"newrelicKey": "SECRET_KEY",
+	"newrelicVerbose": false
+}
